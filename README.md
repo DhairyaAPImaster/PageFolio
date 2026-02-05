@@ -92,7 +92,7 @@ This is a hackathon project so the code might be messy in places. Feel free to f
 
 ## License
 
-MIT - do whatever you want with it
+MIT - do whatever you want with it but do remember that do not use this to gain profit without giving proper credit to the original owner (Dhairya Khanna) and also if publishing this on the web proper credit should go to the original owner of the code (Dhairya Khanna).
 
 ---
 
