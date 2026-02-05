@@ -24,9 +24,8 @@ You'll need Node.js installed. I'm using v18 but anything recent should work.
 ### Installation
 
 ```bash
-# clone the repo
-git clone <YOUR_GIT_URL>
-cd pagefolio
+#Download code
+download the zip code from github then extract it and go to the folder then--
 
 # install dependencies (this might take a minute)
 npm install
@@ -97,4 +96,4 @@ MIT - do whatever you want with it
 
 ---
 
-Made with ☕ for a hackathon
+Made with ☕ for a flavortown.
