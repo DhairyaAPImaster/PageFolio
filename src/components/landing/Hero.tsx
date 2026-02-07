@@ -37,7 +37,7 @@ export function Hero() {
             style={{ borderRadius: '6px' }}
           >
             <Sparkles className="w-4 h-4" />
-            <span>Join 10,000+ creators building stunning portfolios</span>
+            <span>Launch a portfolio you are proud to share</span>
           </motion.div>
 
           <motion.h1
@@ -56,8 +56,8 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            Choose from 40+ professional templates, fill in your details, and launch your 
-            portfolio, resume, or bio link site. No coding required.
+            Choose from 40+ professional templates, fill in your details and launch your 
+            portfolio,resume or bio link site. No coding required.
           </motion.p>
 
           <motion.div
@@ -106,13 +106,11 @@ export function Hero() {
                   return avatars;
                 })()}
               </div>
-              <span>10K+ users</span>
+              <span>No credit card required</span>
             </div>
             <div className="flex items-center gap-1">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-              ))}
-              <span className="ml-1">4.9/5 rating</span>
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <span className="ml-1">Polished, professional templates</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-primary" />
