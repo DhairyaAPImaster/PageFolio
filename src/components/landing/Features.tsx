@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Palette, Layout, Zap, Shield, Globe, Smartphone, Wand2, CreditCard } from 'lucide-react';
+import { Palette, Layout, Zap, Smartphone, Wand2, CreditCard } from 'lucide-react';
 
 const feature_list = [
   {
@@ -23,24 +23,14 @@ const feature_list = [
     description: 'Every template looks stunning on all devices, from phones to desktops.',
   },
   {
-    icon: Globe,
-    title: 'Custom Domains',
-    description: 'Connect your own domain or use our beautiful subdomains for free.',
-  },
-  {
-    icon: Shield,
-    title: 'SSL Secured',
-    description: 'All sites come with free SSL certificates for secure browsing.',
-  },
-  {
     icon: Wand2,
     title: 'AI-Powered Content',
     description: 'Get smart suggestions for your bio, taglines, and project descriptions.',
   },
   {
     icon: CreditCard,
-    title: 'Flexible Pricing',
-    description: 'Start free, upgrade when you need more. Credits for generations and updates.',
+    title: 'Forever Free',
+    description: 'No upgrades, no hidden costs, and no paywalls.',
   },
 ];
 

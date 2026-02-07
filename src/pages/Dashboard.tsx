@@ -12,7 +12,6 @@ interface Website {
   id: string;
   name: string;
   slug: string;
-  is_published: boolean;
   created_at: string;
 }
 
@@ -31,16 +30,6 @@ function WebsiteCard({ website, onDelete, toast }: {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  let status_class = 'px-2 py-0.5 text-xs';
-  let status_text = '';
-  if (website.is_published) {
-    status_class += ' bg-green-100 text-green-700';
-    status_text = 'Live';
-  } else {
-    status_class += ' bg-muted text-muted-foreground';
-    status_text = 'Draft';
-  }
-
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="card-elevated p-6 min-h-[200px] flex flex-col">
       <div className="flex-1">
@@ -48,28 +37,17 @@ function WebsiteCard({ website, onDelete, toast }: {
           <div className="w-10 h-10 bg-primary/10 flex items-center justify-center" style={{ borderRadius: '6px' }}>
             <Globe className="w-5 h-5 text-primary" />
           </div>
-          <span className={status_class} style={{ borderRadius: '4px' }}>
-            {status_text}
-          </span>
         </div>
         <h3 className="font-semibold text-foreground mb-1">{website.name}</h3>
         <p className="text-sm text-muted-foreground truncate">/site/{website.slug}</p>
       </div>
       <div className="flex gap-2 mt-4 pt-4 border-t">
-        {website.is_published ? (
-          <>
-            <Button variant="outline" size="sm" className="flex-1" onClick={() => window.open(`/site/${website.slug}`, '_blank')}>
-              <ExternalLink className="w-3 h-3 mr-1" /> View
-            </Button>
-            <Button variant="ghost" size="sm" onClick={copyLink}>
-              {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
-            </Button>
-          </>
-        ) : (
-          <Button variant="outline" size="sm" className="flex-1" disabled>
-            <Globe className="w-3 h-3 mr-1" /> Not Published
-          </Button>
-        )}
+        <Button variant="outline" size="sm" className="flex-1" onClick={() => window.open(`/site/${website.slug}`, '_blank')}>
+          <ExternalLink className="w-3 h-3 mr-1" /> View
+        </Button>
+        <Button variant="ghost" size="sm" onClick={copyLink}>
+          {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+        </Button>
         <Button variant="ghost" size="sm" onClick={() => onDelete(website.id)} className="text-destructive">
           <Trash2 className="w-4 h-4" />
         </Button>
@@ -102,7 +80,7 @@ export default function Dashboard() {
     
     const { data, error } = await supabase
       .from('websites')
-      .select('id, name, slug, is_published, created_at')
+      .select('id, name, slug, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
     

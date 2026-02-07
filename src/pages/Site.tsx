@@ -17,7 +17,6 @@ export default function Site() {
         .from('websites')
         .select('*, templates:template_id(*)')
         .eq('slug', slug)
-        .eq('is_published', true)
         .maybeSingle();
 
       if (error) throw error;
@@ -47,7 +46,7 @@ export default function Site() {
           <div className="space-y-2">
             <h1 className="text-2xl font-bold text-foreground">Website Not Found</h1>
             <p className="text-muted-foreground">
-              The website you're looking for doesn't exist or hasn't been published yet.
+              The website you're looking for doesn't exist.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

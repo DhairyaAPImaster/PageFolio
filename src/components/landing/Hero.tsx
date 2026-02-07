@@ -138,7 +138,7 @@ export function Hero() {
                 </div>
                 <div className="flex-1 flex items-center justify-center">
                   <div className="px-4 py-1 bg-background text-xs text-muted-foreground" style={{ borderRadius: '4px' }}>
-                    yourname.pagefolio.site
+                    portfolio preview
                   </div>
                 </div>
               </div>

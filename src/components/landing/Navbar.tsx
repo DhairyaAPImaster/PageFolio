@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState, type MouseEvent } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,19 +7,44 @@ import { Button } from '@/components/ui/button';
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleScroll = (id: string) => {
+  const scrollToId = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const headerOffset = 80;
+      const elementTop = element.getBoundingClientRect().top + window.scrollY;
+      const targetPosition = Math.max(elementTop - headerOffset, 0);
+
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
     }
   };
 
+  useEffect(() => {
+    if (!location.hash) {
+      return;
+    }
+
+    const id = location.hash.replace('#', '');
+    scrollToId(id);
+  }, [location.hash]);
+
   const navLinks = [
-    { name: 'Templates', action: () => handleScroll('templates-section') },
-    { name: 'Pricing', action: () => handleScroll('pricing-section') },
-    { name: 'Examples', action: () => handleScroll('templates-section') },
+    { name: 'Templates', id: 'templates-section' },
+    { name: 'Pricing', id: 'pricing-section' },
   ];
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    event.preventDefault();
+
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+      return;
+    }
+
+    scrollToId(id);
+    navigate({ pathname: '/', hash: `#${id}` });
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
@@ -36,13 +61,14 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <button
+              <Link
                 key={link.name}
-                onClick={link.action}
+                to={`/#${link.id}`}
+                onClick={(event) => handleNavClick(event, link.id)}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.name}
-              </button>
+              </Link>
             ))}
           </div>
 
@@ -77,16 +103,17 @@ export function Navbar() {
           >
             <div className="container mx-auto px-4 py-4 space-y-4">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.name}
-                  onClick={() => {
-                    link.action();
+                  to={`/#${link.id}`}
+                  onClick={(event) => {
+                    handleNavClick(event, link.id);
                     setIsOpen(false);
                   }}
                   className="block w-full text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.name}
-                </button>
+                </Link>
               ))}
               <div className="pt-4 border-t border-border space-y-2">
                 <Button
